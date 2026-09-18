@@ -97,6 +97,9 @@ def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--out", default="out/b2")
     p.add_argument("--offline", help="use a previously saved tfl-raw.json instead of the API")
+    p.add_argument("--passes", type=int, default=200, help="snapping passes of the schematic law")
+    p.add_argument("--step", type=float, default=0.05, help="fraction of the way each pass moves an endpoint")
+    p.add_argument("--spacing", type=float, default=0.004, help="particle spacing along an edge")
     a = p.parse_args()
     os.makedirs(a.out, exist_ok=True)
     t0 = time.time()
@@ -112,13 +115,15 @@ def main():
     stations, edges, lines = topology(raw)
     if not stations or not edges:
         print(f"examined nothing: {len(stations)} stations, {len(edges)} edges parsed"); sys.exit(3)
-    pos = schematic(stations, edges)
+    global EDGE_SPACING
+    EDGE_SPACING = a.spacing
+    pos = schematic(stations, edges, passes=a.passes, step=a.step)
     n = draw(pos, edges, a.out)
     facts = {
         "command": "draw underground", "source": f"{API}/Line/Mode/tube + /Line/<id>/Route/Sequence/all",
         "attribution": "Powered by TfL Open Data. Contains OS data (c) Crown copyright and database rights 2016 and Geomni UK Map data (c) and database rights 2019.",
         "lines": len(lines), "stations": len(stations), "edges": len(edges), "particles_drawn": n,
-        "law": "geography then 200 passes of 8-direction edge snapping (step 0.05); edge particles every 0.004; 9 per station",
+        "law": f"geography then {a.passes} passes of 8-direction edge snapping (step {a.step}); edge particles every {a.spacing}; 9 per station",
         "seconds": round(time.time() - t0, 1), "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
     json.dump(facts, open(os.path.join(a.out, "underground.json"), "w"), indent=1)
