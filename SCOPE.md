@@ -104,3 +104,7 @@ Engineering design, failure prediction, telemetry, licensed network data, any cl
 ## 11. How work is paid for
 
 Repeatable work runs on GitHub-hosted runners and the workstation for free. Reasoning is spent one turn at a time. One agent at most, and only after the rules and the scope exist. This document is that scope.
+
+## The home view (Vikram, 18 September 2026, 02:20)
+
+The preferred look, and the thing everything above evolves towards, is the Wafer Development Environment key-to-code version: https://globalgrid2050.com/testcode/wafer-development-environment/202609170044-key-to-code/ . Its dust, its black, its command box and its card are the home; every preset, law, network and matrix in this scope is a change of scope or law on that renderer, never a new page and never a new look.
