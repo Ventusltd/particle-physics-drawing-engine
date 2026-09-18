@@ -14,3 +14,5 @@ Deterministic, like a procedural universe: nothing is chosen per iteration, ever
 | cadence and cap | every 30 minutes, 30 iterations | the owner ticks what to keep |
 
 Every number on every page is measured by the script that drew it; a run that examined nothing refuses; no model text is published. Iteration 04 was the first made under this formula, by Claude and the swarm together, 18 September 2026.
+
+| the system the iteration draws | `SYSTEMS[n mod 8]` over grid, grid400, grid132, substations, shotwick, underground, uk, world | a deterministic tour of real systems on the wafer, one an hour |
