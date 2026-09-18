@@ -1,0 +1,12 @@
+{
+ "command": "draw underground",
+ "source": "https://api.tfl.gov.uk/Line/Mode/tube + /Line/<id>/Route/Sequence/all",
+ "attribution": "Powered by TfL Open Data. Contains OS data (c) Crown copyright and database rights 2016 and Geomni UK Map data (c) and database rights 2019.",
+ "lines": 11,
+ "stations": 341,
+ "edges": 314,
+ "particles_drawn": 9407,
+ "law": "geography then 50 passes of 8-direction edge snapping (step 0.04); edge particles every 0.002; 9 per station",
+ "seconds": 2.7,
+ "generated_utc": "2026-09-18T22:40:06Z"
+}
