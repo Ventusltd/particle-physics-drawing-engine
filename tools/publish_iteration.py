@@ -16,7 +16,7 @@ MAX_KEY = 342795          # the estate's highest issued key on 2026-09-14
 PHI = (1 + 5 ** 0.5) / 2
 
 
-SYSTEMS = ["grid", "grid400", "grid132", "substations", "shotwick", "underground", "uk", "world"]   # real systems the wafer draws
+SYSTEMS = ["grid", "grid400", "grid132", "substations", "shotwick", "underground", "uk", "world", "logo"]   # real systems the wafer draws
 HOME = "../../wafer-development-environment/202609180245-real-systems/"
 
 
@@ -94,7 +94,7 @@ def main(run_dir):
     page = f"""<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Particles iteration {n:02d}</title><style>{STYLE}</style></head><body><main>
 <iframe src="{HOME}?draw={system}" title="the wafer drawing a real system" style="width:100%;height:92vh;border:0;background:#000"></iframe>
-<p><small>Above: the wafer drawing <code>{system}</code> with its own particles, live (iteration {n}: system {n} mod 8 of the tour, line {key} by the formula 1 + floor(frac(n/φ) × 342,795)); type <code>release</code>, then any button. Below: what the swarm measured in this run. The wafer does not yet answer <code>draw underground</code>; that is the next build on this renderer.</small></p>
+<p><small>Above: the wafer drawing <code>{system}</code> with its own particles, live (iteration {n}: system {n} mod 9 of the tour, line {key} by the formula 1 + floor(frac(n/φ) × 342,795)); type <code>release</code>, then any button. Below: what the swarm measured in this run. The wafer does not yet answer <code>draw underground</code>; that is the next build on this renderer.</small></p>
 <h1>{label}</h1>
 <p>testcode/particles/{slug} · machine-made on the MSI at {stamp} by <a href="https://github.com/Ventusltd/particle-physics-drawing-engine">particle-physics-drawing-engine</a> · <a href="../">all iterations</a></p>
 <p>Same-sized particles, positions computed from the address by a named law, nothing stored. Left: one spiral. Right: a stack of layers of 262,144 slots, angle by whole-number arithmetic.</p>
