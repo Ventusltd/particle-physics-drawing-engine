@@ -109,3 +109,9 @@ They chart code, data and published facts. They are not an engineering design to
 3. Generated lines inside the estate or in their own galaxy.
 4. Ventus-only, or other people's code, one galaxy each.
 5. Whether brightness may carry a computed field or a running flash.
+
+## The masterpiece of 18 September: `draw underground` on the wafer itself
+
+https://globalgrid2050.com/testcode/wafer-development-environment/202609180205-underground/
+
+The state wafer, unchanged in look, answering one typed command: 341 stations and 314 edges of the London Underground (Transport for London open data, topology only) drawn with 245,170 of the wafer's own numbered lines placed along the edges and at the stations, the core and the rim kept, by the same blend that gravity and the logo use. Verified live in headless Chrome: HUD `showing 245,170 of 250,174 lines · underground`, no page errors, pixels drawn. This is build B2 on the home renderer: a network as a law on the same dust. `release` returns every line to its own place.

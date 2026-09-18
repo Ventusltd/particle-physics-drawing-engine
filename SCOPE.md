@@ -80,7 +80,7 @@ T1 a physical iPhone draws one layer · T2 exactness (in this repo, passing) · 
 ## 9. The first three builds
 
 - **B1. Spiral and stack, side by side.** The same particles under both laws, a button for each, with the density picture of every layer. Decision 1 is taken by looking.
-- **B2. A network from a typed command.** A feeder from the engine's own published data drawn as particles along edges under a schematic law; then a public map topology, topology only.
+- **B2. A network from a typed command.** DONE on the renderer, 18 September: `draw underground` in version 202609180205-underground places 245,170 lines along the Underground's 314 edges. Next: a feeder from the engine's own data under the same law, and `draw` as a preset button.
 - **B3. The phone.** T1, with the phone in hand, before anything is called "any device".
 
 ## 10. Out of scope now
