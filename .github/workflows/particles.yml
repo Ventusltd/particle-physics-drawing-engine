@@ -4,8 +4,28 @@ on:
   push:
     paths: ["tools/**", ".github/workflows/particles.yml"]
   workflow_dispatch:
+    inputs:
+      msi:
+        description: "also run on the MSI self-hosted runner (register one for this repo first)"
+        type: boolean
+        default: false
 
 jobs:
+  # The workstation's own compute, used when credits are scarce. Its manifest is reconciled
+  # against the two GitHub-hosted machines below: three ledgers, one hash, or the run fails.
+  msi:
+    if: ${{ inputs.msi }}
+    runs-on: [self-hosted, msi, gpu]
+    steps:
+      - uses: actions/checkout@v4
+      - run: python tools/particles.py exactness
+      - run: python tools/particles.py layer --layer 1 --recipe grid-feeder --seed 2026-09-18 --out out
+      - run: python tools/particles.py dna out/layer-1.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: layer-msi
+          path: out
+
   generate:
     strategy:
       matrix:
@@ -35,5 +55,5 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: got
-      - name: T4 the same layer on two operating systems must hash identically
-        run: python tools/particles.py compare got/layer-ubuntu-latest/layer-1.json got/layer-windows-latest/layer-1.json
+      - name: T4 reconciliation - every machine that generated the layer must hold the same hash
+        run: python tools/particles.py compare got/layer-*/layer-1.json
