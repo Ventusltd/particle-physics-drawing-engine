@@ -12,6 +12,16 @@ REPO = "Ventusltd/globalgrid2050"
 BASE = "testcode/particles"
 COUNTER = r"E:\particles-runs\iteration.txt"
 MAX_ITER = 30
+MAX_KEY = 342795          # the estate's highest issued key on 2026-09-14
+PHI = (1 + 5 ** 0.5) / 2
+
+
+def key_for(n):
+    """The formula: iteration n opens on line 1 + floor(frac(n/phi) * MAX_KEY). Golden-ratio spacing:
+    every iteration lands far from every previous one, the sequence never repeats a key before all are
+    visited (to rounding), and anyone can recompute which line iteration n shows. No Man's Sky rule:
+    nothing chosen, everything derived from n."""
+    return 1 + int(((n / PHI) % 1.0) * MAX_KEY)
 STYLE = ("body{margin:0;background:#000;color:#ccc;font:15px/1.5 ui-monospace,Consolas,monospace}"
          "main{max-width:1400px;margin:0 auto;padding:0 0 24px}h1,p,table,pre,small{margin-left:16px;margin-right:16px}h1{font-size:18px;color:#f2f2f2;margin:0 0 4px}"
          "img{width:100%;height:auto;display:block;background:#000;margin:16px 0 6px}small{color:#8a8a8a}"
@@ -47,14 +57,15 @@ def main(run_dir):
     status = open(os.path.join(run_dir, "SCOPE-STATUS.md"), encoding="utf-8").read() if os.path.exists(os.path.join(run_dir, "SCOPE-STATUS.md")) else ""
     passed = status.split("Ran ")[1].split(".")[0] if "Ran " in status else "not run"
     stamp = os.path.basename(run_dir)
-    slug = f"{n:02d}-run-{stamp.lower()}"
-    label = (f"Iteration {n}: {b1['particles']:,} particles under two laws" if b1 else f"Iteration {n}") + \
+    key = key_for(n)
+    slug = f"{n:02d}-line-{key}"
+    label = (f"Iteration {n}: line {key}; {b1['particles']:,} particles under two laws" if b1 else f"Iteration {n}") + \
             (f"; the Underground, {b2['stations']} stops" if b2 else "") + f"; scope tests {passed}"
     rows = "".join(f"<tr><td>layer {m['layer']}</td><td>{m['slots']:,} slots</td><td><code>{m['sha256_of_line_hashes'][:16]}…</code></td><td>{m['seconds']} s</td></tr>" for m in layers)
     page = f"""<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Particles iteration {n:02d}</title><style>{STYLE}</style></head><body><main>
-<iframe src="../../wafer-development-environment/202609170039-state-39885/?line=39885" title="the state wafer, the home view" style="width:100%;height:92vh;border:0;background:#000"></iframe>
-<p><small>Above: the home view, the wafer at line 39885 with its state, live. Below: what the swarm measured in this run. The wafer does not yet answer <code>draw underground</code>; that is the next build on this renderer.</small></p>
+<iframe src="../../wafer-development-environment/202609170039-state-39885/?line={key}" title="the state wafer, the home view" style="width:100%;height:92vh;border:0;background:#000"></iframe>
+<p><small>Above: the home view, the wafer opened on line {key} (iteration {n} by the formula 1 + floor(frac(n/φ) × 342,795)) with its state, live. Below: what the swarm measured in this run. The wafer does not yet answer <code>draw underground</code>; that is the next build on this renderer.</small></p>
 <h1>{label}</h1>
 <p>testcode/particles/{slug} · machine-made on the MSI at {stamp} by <a href="https://github.com/Ventusltd/particle-physics-drawing-engine">particle-physics-drawing-engine</a> · <a href="../">all iterations</a></p>
 <p>Same-sized particles, positions computed from the address by a named law, nothing stored. Left: one spiral. Right: a stack of layers of 262,144 slots, angle by whole-number arithmetic.</p>
