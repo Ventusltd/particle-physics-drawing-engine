@@ -39,6 +39,26 @@ def put(path, data: bytes, msg):
     return True
 
 
+def put_many(files, msg):
+    """One commit for all files of an iteration, through the git data API: one deploy, not three."""
+    def api(method, path, body=None):
+        args = ["gh", "api", "-X", method, path]
+        r = subprocess.run(args + (["--input", "-"] if body is not None else []), input=json.dumps(body) if body is not None else None, capture_output=True, text=True)
+        if r.returncode != 0:
+            raise RuntimeError(f"{method} {path}: {r.stderr[:200]}")
+        return json.loads(r.stdout)
+    head = api("GET", f"repos/{REPO}/git/ref/heads/main")["object"]["sha"]
+    base_tree = api("GET", f"repos/{REPO}/git/commits/{head}")["tree"]["sha"]
+    tree = []
+    for path, data in files.items():
+        blob = api("POST", f"repos/{REPO}/git/blobs", {"content": base64.b64encode(data).decode(), "encoding": "base64"})["sha"]
+        tree.append({"path": path, "mode": "100644", "type": "blob", "sha": blob})
+    new_tree = api("POST", f"repos/{REPO}/git/trees", {"base_tree": base_tree, "tree": tree})["sha"]
+    commit = api("POST", f"repos/{REPO}/git/commits", {"message": msg, "tree": new_tree, "parents": [head]})["sha"]
+    api("PATCH", f"repos/{REPO}/git/refs/heads/main", {"sha": commit})
+    return commit
+
+
 def load(p):
     try:
         return json.load(open(p))
@@ -80,17 +100,14 @@ def main(run_dir):
 <pre style="white-space:pre-wrap;color:#aaa">{status.replace('<','&lt;')}</pre>
 <small>This page charts measured facts. It is not a design tool; above 100 kW a chartered electrical engineer signs.</small>
 </main></body></html>"""
-    ok = put(f"{BASE}/{slug}/index.html", page.encode(), f"testcode/particles {n:02d}: {label}")
+    files = {f"{BASE}/{slug}/index.html": page.encode()}
     for src, name in ((os.path.join(run_dir, "b1-layers-256", "spiral-vs-stack.png"), "spiral-vs-stack.png"), (os.path.join(run_dir, "b2", "underground.png"), "underground.png")):
-        if ok and os.path.exists(src):
-            ok = put(f"{BASE}/{slug}/{name}", open(src, "rb").read(), f"testcode/particles {n:02d}: {name}")
-    if not ok:
-        return 1
+        if os.path.exists(src):
+            files[f"{BASE}/{slug}/{name}"] = open(src, "rb").read()
     # index: append this iteration to a machine-kept list, then render
     listing = r"E:\particles-runs\iterations.json"
     items = load(listing) or []
     items.append({"n": n, "slug": slug, "label": label, "stamp": stamp})
-    json.dump(items, open(listing, "w"), indent=1)
     lis = "".join(f'<tr><td>{i["n"]:02d}</td><td><a href="{i["slug"]}/">{i["label"]}</a></td><td>{i["stamp"]}</td><td>keep? ☐</td></tr>' for i in items)
     index = f"""<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Particles: numbered iterations</title><style>{STYLE}</style></head><body><main>
@@ -99,11 +116,15 @@ def main(run_dir):
 <table><tr><th>#</th><th>iteration</th><th>run (UTC)</th><th></th></tr>{lis}</table>
 <small>Proof of the kind of work this leads to: <a href="https://ventusltd.github.io/gridatlas/">GridAtlas</a> and <a href="https://ventusltd.github.io/ventus-grid-engine/">Ventus Grid Engine</a>.</small>
 </main></body></html>"""
-    ok = put(f"{BASE}/index.html", index.encode(), f"testcode/particles index: {n:02d} iterations")
-    if ok:
-        open(COUNTER, "w").write(str(n))
-        print(f"published iteration {n:02d}: {label}")
-    return 0 if ok else 1
+    files[f"{BASE}/index.html"] = index.encode()
+    try:
+        commit = put_many(files, f"testcode/particles {n:02d}: {label}")
+    except RuntimeError as e:
+        print(f"publish failed: {e}"); return 1
+    json.dump(items, open(listing, "w"), indent=1)
+    open(COUNTER, "w").write(str(n))
+    print(f"published iteration {n:02d} in one commit {commit[:7]}: {label}")
+    return 0
 
 
 if __name__ == "__main__":
