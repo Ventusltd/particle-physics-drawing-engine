@@ -70,7 +70,7 @@ jobs:
     runs-on: [self-hosted, msi, gpu]
     steps:
       - uses: actions/checkout@v4
-      - name: big run on the MSI, written to E:
+      - name: "big run on the MSI, written to drive E"
         shell: pwsh
         run: |
           $out = "E:\particles-runs\$(Get-Date -Format yyyyMMddTHHmm)-layers-${{ matrix.layers }}"
@@ -79,6 +79,6 @@ jobs:
           python tools/particles.py layer --layer ${{ matrix.layers }} --out $out
           python tools/particles.py dna "$out\layer-${{ matrix.layers }}.json"
           Get-ChildItem $out | Select-Object Name, Length
-      - name: mirror the repository's results to E:
+      - name: "mirror the repository results to drive E"
         shell: pwsh
         run: robocopy results "E:\particles-runs\results-mirror" /E /NFL /NDL /NJH /NJS; if ($LASTEXITCODE -le 7) { exit 0 }
