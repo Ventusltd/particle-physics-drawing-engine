@@ -134,3 +134,7 @@ One wafer, many draws: each file is a layer the wafer draws on command (`draw gr
 Attribution: pandapower, BSD 3-clause, L. Thurner et al., IEEE Transactions on Power Systems 2018, pandapower.readthedocs.io. A published example network, not a real utility's data; a chart of a calculation, not a design; above 100 kW a chartered engineer signs.
 
 Layers on the one wafer tonight: grid, grid400, grid132, substations, shotwick, underground, uk, world, trench, fault, and the wordmark. Buttons, typed commands and the text selector all reach the same laws. Version: https://globalgrid2050.com/testcode/wafer-development-environment/202609180245-real-systems/
+
+## No warranty, as Ubuntu gives none
+
+Everything here, the engine, the translator, every drawing and every study, is provided as is, without warranty of any kind, express or implied, exactly as the Apache License 2.0 (section 7) and Ubuntu's own terms state it. It is for rapid grid studies and for education, for anyone, at no charge. A drawing is a chart of published data or of a stated calculation; it is never a design, never a survey, never advice. Real work is signed by a chartered electrical engineer on a real project scope, and above 100 kW always.
