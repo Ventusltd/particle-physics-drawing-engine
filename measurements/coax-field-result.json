@@ -1,0 +1,70 @@
+{
+ "date": "2026-09-17T23:51:39.633Z",
+ "problem": "coax, V0=1, r0=1, R=2.5, homogeneous dielectric, normalised units",
+ "runs": [
+  {
+   "method": "A square grid",
+   "free": 67516,
+   "h": 0.015625,
+   "sweeps": 1255,
+   "residual": 9.687506352662467e-11,
+   "maxVerr": 0.01316807625586014,
+   "maxErelErr": 0.0912913887575941,
+   "maxErelErrNearConductor": 0.08964763462030595,
+   "nE": 66248,
+   "ms": 490
+  },
+  {
+   "method": "B2 wafer law + surface rings (meshless GFDM)",
+   "K": 2500,
+   "k0": 400,
+   "free": 2001,
+   "h": 0.0886226925452758,
+   "neighbours": 14,
+   "negativeLaplacianWeights": 171,
+   "iterations": 55,
+   "residual": 9.301247767608401e-12,
+   "maxVerr": 0.0005125008356102745,
+   "maxErelErr": 0.004173250883647222,
+   "rmsErelErr": 0.0005697446598098975,
+   "maxErelErrNearConductor": 0.004173250883647222,
+   "nE": 2001,
+   "ms": 41
+  },
+  {
+   "method": "B2 wafer law + surface rings (meshless GFDM)",
+   "K": 25000,
+   "k0": 4000,
+   "free": 20686,
+   "h": 0.02802495608198964,
+   "neighbours": 14,
+   "negativeLaplacianWeights": 686,
+   "iterations": 118,
+   "residual": 9.080088729565728e-12,
+   "maxVerr": 0.000039440375313448683,
+   "maxErelErr": 0.000280718443425759,
+   "rmsErelErr": 0.00007462418479220652,
+   "maxErelErrNearConductor": 0.000280718443425759,
+   "nE": 20686,
+   "ms": 245
+  },
+  {
+   "method": "B2 wafer law + surface rings (meshless GFDM)",
+   "K": 250174,
+   "k0": 40028,
+   "free": 209154,
+   "h": 0.008859169087781128,
+   "neighbours": 14,
+   "negativeLaplacianWeights": 1641,
+   "iterations": 293,
+   "residual": 8.404806952178743e-12,
+   "maxVerr": 0.0000034933159718253393,
+   "maxErelErr": 0.000035779281356409116,
+   "rmsErelErr": 0.000007441324597781622,
+   "maxErelErrNearConductor": 0.000035779281356409116,
+   "nE": 209154,
+   "ms": 4052
+  }
+ ],
+ "verdict": "PASS"
+}

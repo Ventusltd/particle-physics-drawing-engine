@@ -1,0 +1,178 @@
+{
+ "script": "measure-proto.mjs",
+ "label": "desktop Chrome on the MSI RTX, NOT a phone",
+ "when_utc": "2026-09-17T23:48:34.731Z",
+ "chrome": "Chrome/153.0.8010.52",
+ "runs": [
+  {
+   "N": 262144,
+   "pointSize": 2,
+   "canvas": [
+    1440,
+    900
+   ],
+   "A_cpu_place_ms": 11.099999999627471,
+   "A_position_bytes": 2097152,
+   "A_upload_call_ms": 0.8000000007450581,
+   "A_frame": {
+    "median_ms": 0.2000000011175871,
+    "p95_ms": 0.599999999627471,
+    "max_ms": 3.5
+   },
+   "A_non_background_pixels": 551121,
+   "B_position_bytes": 0,
+   "B_frame": {
+    "median_ms": 0.2999999988824129,
+    "p95_ms": 1.300000000745058,
+    "max_ms": 40.69999999925494
+   },
+   "B_non_background_pixels": 551121,
+   "TF_compute_and_readback_ms": 4.5,
+   "TF": {
+    "compared": 262144,
+    "worst_distance_units": 0.0002687569667779131,
+    "worst_key": 258800,
+    "bit_identical_to_js_fround": 1369
+   },
+   "errors": [],
+   "heap_used": 16120040
+  },
+  {
+   "N": 1048576,
+   "pointSize": 2,
+   "canvas": [
+    1440,
+    900
+   ],
+   "A_cpu_place_ms": 39.20000000111759,
+   "A_position_bytes": 8388608,
+   "A_upload_call_ms": 3.200000001117587,
+   "A_frame": {
+    "median_ms": 0.5,
+    "p95_ms": 0.7000000011175871,
+    "max_ms": 5.599999999627471
+   },
+   "A_non_background_pixels": 552376,
+   "B_position_bytes": 0,
+   "B_frame": {
+    "median_ms": 0.5,
+    "p95_ms": 0.900000000372529,
+    "max_ms": 5
+   },
+   "B_non_background_pixels": 552385,
+   "TF_compute_and_readback_ms": 11.899999998509884,
+   "TF": {
+    "compared": 1048576,
+    "worst_distance_units": 0.0005509961483022167,
+    "worst_key": 1031224,
+    "bit_identical_to_js_fround": 5409
+   },
+   "errors": [],
+   "heap_used": 28476412
+  },
+  {
+   "N": 4194304,
+   "pointSize": 2,
+   "canvas": [
+    1440,
+    900
+   ],
+   "A_cpu_place_ms": 150.7999999988824,
+   "A_position_bytes": 33554432,
+   "A_upload_call_ms": 28.59999999962747,
+   "A_frame": {
+    "median_ms": 1.799999998882413,
+    "p95_ms": 2.299999998882413,
+    "max_ms": 3.700000001117587
+   },
+   "A_non_background_pixels": 552860,
+   "B_position_bytes": 0,
+   "B_frame": {
+    "median_ms": 1.699999999254942,
+    "p95_ms": 2,
+    "max_ms": 2
+   },
+   "B_non_background_pixels": 552793,
+   "TF_compute_and_readback_ms": 10,
+   "TF": {
+    "compared": 1048576,
+    "worst_distance_units": 0.0005509961483022167,
+    "worst_key": 1031224,
+    "bit_identical_to_js_fround": 5409
+   },
+   "errors": [],
+   "heap_used": 54418672
+  },
+  {
+   "N": 4194304,
+   "pointSize": 1,
+   "canvas": [
+    1440,
+    900
+   ],
+   "A_cpu_place_ms": 151.5,
+   "A_position_bytes": 33554432,
+   "A_upload_call_ms": 15.5,
+   "A_frame": {
+    "median_ms": 2,
+    "p95_ms": 2.5,
+    "max_ms": 3.900000000372529
+   },
+   "A_non_background_pixels": 551488,
+   "B_position_bytes": 0,
+   "B_frame": {
+    "median_ms": 2,
+    "p95_ms": 2.300000000745058,
+    "max_ms": 2.400000000372529
+   },
+   "B_non_background_pixels": 551454,
+   "TF_compute_and_readback_ms": 10.099999999627471,
+   "TF": {
+    "compared": 1048576,
+    "worst_distance_units": 0.0005509961483022167,
+    "worst_key": 1031224,
+    "bit_identical_to_js_fround": 5409
+   },
+   "errors": [],
+   "heap_used": 54419092
+  }
+ ],
+ "t2": [
+  {
+   "key": 1,
+   "radius": 1,
+   "float32_law_off_by_units": 8.924098219178386e-8,
+   "whole_number_law_off_by_units": 2.713672522365281e-7
+  },
+  {
+   "key": 1000,
+   "radius": 31.622776601683793,
+   "float32_law_off_by_units": 0.0030029946188844846,
+   "whole_number_law_off_by_units": 0.00003077458241391513
+  },
+  {
+   "key": 250174,
+   "radius": 500.17396973453145,
+   "float32_law_off_by_units": 13.021229451109347,
+   "whole_number_law_off_by_units": 0.09117159795836283
+  },
+  {
+   "key": 262143,
+   "radius": 511.9990234365687,
+   "float32_law_off_by_units": 0.8034501616024111,
+   "whole_number_law_off_by_units": 0.09768362235327074
+  },
+  {
+   "key": 1048576,
+   "radius": 1024,
+   "float32_law_off_by_units": 95.7868179766161,
+   "whole_number_law_off_by_units": 0.7810477880572515
+  },
+  {
+   "key": 16777216,
+   "radius": 4096,
+   "float32_law_off_by_units": 5575.633374079812,
+   "whole_number_law_off_by_units": 49.9867494480811
+  }
+ ]
+}

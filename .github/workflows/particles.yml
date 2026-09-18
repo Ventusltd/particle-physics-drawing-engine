@@ -1,0 +1,39 @@
+name: particles
+# GitHub-hosted runners (free for a public repository). No self-hosted runner and no model is involved.
+on:
+  push:
+    paths: ["tools/**", ".github/workflows/particles.yml"]
+  workflow_dispatch:
+
+jobs:
+  generate:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: T2 exactness of the angle law
+        run: python tools/particles.py exactness
+      - name: generate layer 1 (nothing stored but the manifest)
+        run: python tools/particles.py layer --layer 1 --recipe grid-feeder --seed 2026-09-18 --out out
+      - name: DNA test on the same machine
+        run: python tools/particles.py dna out/layer-1.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: layer-${{ matrix.os }}
+          path: out
+
+  dna-across-machines:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: got
+      - name: T4 the same layer on two operating systems must hash identically
+        run: python tools/particles.py compare got/layer-ubuntu-latest/layer-1.json got/layer-windows-latest/layer-1.json

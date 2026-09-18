@@ -55,3 +55,57 @@ Six views of the same 250,174 permanently numbered lines of code, drawn by diffe
 
 ### What these are not
 They chart code, data and published facts. They are not an engineering design tool and make no prediction about any cable or network; above 100 kW a chartered electrical engineer signs. The layouts are physics-inspired mathematics: code is not matter.
+
+## The concept, in five sentences
+
+1. **Every thing drawn is a particle with a permanent address**, and behind every particle there is something real: a line of code at a commit, a bus in a network, a cell in a module, a generated line that a recipe and a seed will produce again.
+2. **Particles are all the same size. Meaning is carried by where they are and how densely they sit**, and position is computed from the address by a named law, never stored.
+3. **A galaxy is unbounded by construction**: it is made of layers of 2¹⁸ = 262,144 slots, and a generated layer stores nothing but its recipe, its seed and a hash, so it costs bytes, not lines.
+4. **Any complex system is a scope plus a law**: a typed command names the set of particles and the law that places them, whether spiral, ring, chord, metro-style network, floorplan or orbit; the particles do not change, the law does.
+5. **Every number on a page comes from a script that can fail**, the checks state what they examined, and the tool charts the truth without claiming to be the engineer.
+
+## Measured on 18 September 2026 (files in `measurements/`)
+
+| claim | measurement | file |
+|---|---|---|
+| Same-sized particles can carry density without overlapping | 250,174 real lines, 9 layouts: the plain wafer has 0 overlapping pairs; a weighted law (weights from line length, bounded to [0.25, 1], angle by rank, smoothed) also 0; unbounded weights blew the rim from 585 to 4,527 units | `packing-result.txt`, `plain-wafer-250174.png`, `weighted-density-law-250174.png` |
+| The angle law survives scale only inside layers | 64-bit CPU: exact to 4.6e-11 rad at key 250,174. 32-bit shader: 26 px off at a 1,000-px rim today, 1,361 px at key 2²⁴. Whole-number law: 0.19 px within a 2¹⁸ layer, 1,408 px across a spiral at 2³¹ | `exactness-result.txt`, `exactness.mjs`, `tools/particles.py exactness` |
+| Millions of particles from the address, nothing uploaded | 4,194,304 points placed in the vertex shader from the integer key: 0 bytes of positions, 1.8 ms a frame on an RTX 5070 Ti (desktop Chrome, not a phone); pixels counted, not assumed | `shader-law-result.json`, `shader-law-4194304-points.png` |
+| The particles can be nodes of a real calculation | coaxial cable field solved on wafer-law particles by meshless finite differences: worst error 0.0036 % at 209,154 particles against E(r) = V / (r ln(R/r₀)); the first attempt with staircased surfaces failed at 3.8 % and is kept | `coax-field-test.mjs`, `coax-field-result.json`, `coax-field-error-vs-node-count.png` |
+| A generated layer regenerates identically | `tools/particles.py`: 262,144 lines from recipe + seed in 0.64 s; DNA test MATCH; the workflow repeats it on Ubuntu and Windows and fails if the hashes differ | `.github/workflows/particles.yml` |
+| The public site, as a visitor | 182 URLs requested: homepage and manifest mostly 200; two unrendered template links on the homepage, three `null` manifest entries, front door shows 7 of 119 surfaces, 24 live surfaces unlisted | `site-links-20260918.json` |
+
+## The plan
+
+- **Layers.** New galaxies are stacks of 2¹⁸-slot wafers. `address = layer × 262,144 + slot`. Existing keys keep their numbers.
+- **Exact angle.** Within a layer, `frac = (slot × 2,654,435,769) mod 2³² / 2³²`, `θ = 2π(1 − frac)`: whole-number arithmetic, identical bits on every device, the golden angle to 7.3e-10 rad per slot. A new named law; the frozen wafer stays frozen.
+- **Generated layers.** Twin = (generator, commit, recipe, seed, slot). The DNA test regenerates on two machines and compares hashes, or refuses.
+- **Physics that scales is closed-form**: motion as a pure function of (address, time, law), such as Kepler's equation solved per particle per frame. Interacting physics (collisions, fields) only inside a bounded, seeded, replayable scope, with conservation asserted by a test.
+- **Networks as laws.** A graph (buses and branches, stations and lines) is drawn by placing the same particles along edges at fixed spacing under a schematic layout law; the topology is fact, the artwork is ours.
+- **Matrices.** A dense grid (adjacency, a calculation table) is one instanced quad per cell or a data texture, never a DOM node per cell.
+- **Loads on any device.** WebGL2 with a 2-D fallback that draws the same particles; first paint under 2 MB; WebGPU only as an optional fast path. Typed commands with a fixed grammar, parsed without a model, the same for a person and an AI.
+- **Tests that can fail**, in order: T1 a physical phone; T2 exactness (in this repo); T3 cross-device positions within a pixel; T4 generator determinism (in this repo); T5 address to source in one request; T6 a law missing a fact refuses by name; T7 sixteen layers served from the workstation's second drive.
+
+## How this repository links to the estate
+
+| repository | what it gives the particles |
+|---|---|
+| [ventus-grid-engine](https://github.com/Ventusltd/ventus-grid-engine) | the instruction set: pure calculation modules, imported at a pinned commit; the [periodic table](https://ventusltd.github.io/stars/table.html) |
+| [gridatlas](https://github.com/Ventusltd/gridatlas) | the loading discipline (nothing loads until asked, zoom gates, a queue of three) and the map cartridges |
+| [cvaa](https://github.com/Ventusltd/cvaa) | the vaccines: checks that refuse (no `Math.random`, no private paths, twins must resolve) |
+| [stars](https://github.com/Ventusltd/stars) | the numbered database: key → repo, commit, path, line |
+| [globalgrid2050](https://github.com/Ventusltd/globalgrid2050) | the timestamped testcode surfaces and the homepage |
+| [galaxies-wafers](https://github.com/Ventusltd/galaxies-wafers) | the iterations (code card, 400 kV engine mode, fast zoom) |
+| [star-electron-star](https://github.com/Ventusltd/star-electron-star) | the cockpit: Line Wafer plus typed commands |
+
+## Runners
+
+`.github/workflows/particles.yml` runs on GitHub-hosted machines on every push to `tools/` and on demand: exactness, a generated layer on Ubuntu and on Windows, and the cross-machine DNA test. It needs no self-hosted runner and no model.
+
+## Decisions open (the owner's)
+
+1. Stack of layers for new galaxies, or one spiral.
+2. The exact whole-number angle as a named law; which law is home.
+3. Generated lines inside the estate or in their own galaxy.
+4. Ventus-only, or other people's code, one galaxy each.
+5. Whether brightness may carry a computed field or a running flash.
