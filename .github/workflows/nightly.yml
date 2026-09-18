@@ -41,12 +41,15 @@ jobs:
           python tools/particles.py exactness
           python tools/particles.py layer --layer 1 --out out/layer
           python tools/particles.py dna out/layer/layer-1.json
+      - name: the scope drives the loop
+        run: python tools/scope_check.py
       - name: commit the results
         run: |
           stamp=$(date -u +%Y%m%dT%H%MZ)
           mkdir -p results/$stamp results/latest
           cp out/b1/*.json out/b2/underground.json out/layer/layer-1.json results/$stamp/
-          cp out/b1/spiral-vs-stack.png out/b2/underground.png results/latest/   # overwritten in place; big data stays off GitHub
+          cp out/b1/spiral-vs-stack.png out/b2/underground.png results/latest/
+          cp results/SCOPE-STATUS.md results/latest/   # overwritten in place; big data stays off GitHub
           {
             echo "# Latest results: $stamp (GitHub-hosted, ubuntu-latest)"
             echo
