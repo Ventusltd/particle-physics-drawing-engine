@@ -126,3 +126,11 @@ The state wafer, unchanged in look, answering one typed command: 341 stations an
 4. Every node is a vertex of the source or a point in the source. Nothing is invented; the source and its attribution travel inside the file.
 
 One wafer, many draws: each file is a layer the wafer draws on command (`draw grid`, `draw substations`, `draw shotwick` …) with its own particles, and `release` returns them. Eight layers exist tonight: grid (400 kV + 132 kV + substations), grid400, grid132, substations, shotwick (the site with the lines around it), underground, uk, world. Version: https://globalgrid2050.com/testcode/wafer-development-environment/202609180245-real-systems/
+
+## Physics on the wafer without reinventing it: the fault study
+
+`tools/fault.py` runs a three-phase fault on pandapower's published 20 kV example network (mv_oberrhein) with pandapower's IEC 60909 short-circuit module, and the translator carries each line's initial symmetrical short-circuit current as an edge weight. On the wafer, `draw fault` places particles along each line in proportion to length × current, so the paths the fault current takes are the dense ones: illumination by density, no new colour, no new size. Measured on 18 September: fault at bus 147, I"k 1.874 kA at the fault, 34 of 181 lines carrying more than 5 % of the peak; bus fault levels from 1.874 to 5.79 kA across the network. The supply was stated (1,000 MVA, R/X 0.1) because the example carries none, and generation was excluded; both are written into the file.
+
+Attribution: pandapower, BSD 3-clause, L. Thurner et al., IEEE Transactions on Power Systems 2018, pandapower.readthedocs.io. A published example network, not a real utility's data; a chart of a calculation, not a design; above 100 kW a chartered engineer signs.
+
+Layers on the one wafer tonight: grid, grid400, grid132, substations, shotwick, underground, uk, world, trench, fault, and the wordmark. Buttons, typed commands and the text selector all reach the same laws. Version: https://globalgrid2050.com/testcode/wafer-development-environment/202609180245-real-systems/
