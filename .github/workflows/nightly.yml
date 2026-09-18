@@ -3,6 +3,8 @@ name: nightly
 # from a typed command), commits the pictures and the measured facts into results/, and the MSI swarm,
 # when dispatched, does the big runs into E:\particles-runs and mirrors them.
 on:
+  push:
+    paths: [".github/workflows/nightly.yml", "tools/**"]
   schedule:
     - cron: "17 */3 * * *"
   workflow_dispatch:
