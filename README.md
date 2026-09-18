@@ -115,3 +115,14 @@ They chart code, data and published facts. They are not an engineering design to
 https://globalgrid2050.com/testcode/wafer-development-environment/202609180205-underground/
 
 The state wafer, unchanged in look, answering one typed command: 341 stations and 314 edges of the London Underground (Transport for London open data, topology only) drawn with 245,170 of the wafer's own numbered lines placed along the edges and at the stations, the core and the rim kept, by the same blend that gravity and the logo use. Verified live in headless Chrome: HUD `showing 245,170 of 250,174 lines · underground`, no page errors, pixels drawn. This is build B2 on the home renderer: a network as a law on the same dust. `release` returns every line to its own place.
+
+## The deterministic translator: GridAtlas language → wafer language
+
+`tools/networks.py` turns any GridAtlas layer into a draw on the one wafer. Input: GeoJSON as GridAtlas already serves it (Points and LineStrings with their properties). Output: the wafer's network language, `{"stations": [[x, y, name], …], "edges": [[i, j], …]}` in the unit square, north up. The rules, all fixed and printed with every run:
+
+1. Equirectangular projection scaled by cos(mean latitude), so shapes keep their proportions; fit to [−0.9, 0.9] preserving aspect.
+2. Lines simplified by Douglas–Peucker at a stated tolerance (0.002° for the grid); closed rings are split first so islands keep their shape.
+3. Vertices shared by exact coordinate (rounded to 10⁻⁵°) become one node; edges join consecutive vertices; points become nodes without edges.
+4. Every node is a vertex of the source or a point in the source. Nothing is invented; the source and its attribution travel inside the file.
+
+One wafer, many draws: each file is a layer the wafer draws on command (`draw grid`, `draw substations`, `draw shotwick` …) with its own particles, and `release` returns them. Eight layers exist tonight: grid (400 kV + 132 kV + substations), grid400, grid132, substations, shotwick (the site with the lines around it), underground, uk, world. Version: https://globalgrid2050.com/testcode/wafer-development-environment/202609180245-real-systems/
