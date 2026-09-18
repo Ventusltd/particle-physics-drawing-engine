@@ -1,28 +1,3 @@
-# Latest results: 20260918T0101Z (GitHub-hosted, ubuntu-latest)
-
-![spiral vs stack](latest/spiral-vs-stack.png)
-
-![the Underground from a typed command](latest/underground.png)
-
-```
-{
- "layers": 4,
- "particles_per_layer": 262144,
- "particles": 1048576,
- "spiral": {
-  "cells_lit": 802553,
-  "peak_per_cell": 4,
-  "seconds": 0.67
- },
- "stack": {
-  "cells_lit": 803052,
-  "peak_per_cell": 4,
-  "tile_px": 512,
-  "seconds": 0.92
- },
- "raster_px": 1024,
- "generated_utc": "2026-09-18T01:00:58Z"
-}
 {
  "command": "draw underground",
  "source": "https://api.tfl.gov.uk/Line/Mode/tube + /Line/<id>/Route/Sequence/all",
@@ -34,4 +9,4 @@
  "law": "geography then 200 passes of 8-direction edge snapping (step 0.05); edge particles every 0.004; 9 per station",
  "seconds": 1.9,
  "generated_utc": "2026-09-18T01:01:00Z"
-}```
+}
