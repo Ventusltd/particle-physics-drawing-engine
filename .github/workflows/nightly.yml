@@ -44,14 +44,15 @@ jobs:
       - name: commit the results
         run: |
           stamp=$(date -u +%Y%m%dT%H%MZ)
-          mkdir -p results/$stamp
-          cp out/b1/*.png out/b1/*.json out/b2/underground.png out/b2/underground.json out/layer/layer-1.json results/$stamp/
+          mkdir -p results/$stamp results/latest
+          cp out/b1/*.json out/b2/underground.json out/layer/layer-1.json results/$stamp/
+          cp out/b1/spiral-vs-stack.png out/b2/underground.png results/latest/   # overwritten in place; big data stays off GitHub
           {
             echo "# Latest results: $stamp (GitHub-hosted, ubuntu-latest)"
             echo
-            echo "![spiral vs stack](results/$stamp/spiral-vs-stack.png)"
+            echo "![spiral vs stack](latest/spiral-vs-stack.png)"
             echo
-            echo "![the Underground from a typed command](results/$stamp/underground.png)"
+            echo "![the Underground from a typed command](latest/underground.png)"
             echo
             echo '```'; cat out/b1/spiral-vs-stack.json; echo; cat out/b2/underground.json; echo '```'
           } > results/LATEST.md
