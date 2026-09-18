@@ -87,6 +87,20 @@ T1 a physical iPhone draws one layer · T2 exactness (in this repo, passing) · 
 
 Engineering design, failure prediction, telemetry, licensed network data, any claim not measured, any agent fan-out, any spend on collecting data.
 
+## 10a. Decisions of the same morning, machines and delivery (Vikram)
+
+| # | decision | answer |
+|---|---|---|
+| 11 | MSI runners for this repository | **Up to 40**, with the GPU and RAM, watching resources so the PC never crashes; the MSI is cheaper than credits. Registered by Vikram's hand (`register-runners.ps1` plan updated to 40). |
+| 12 | Old runner copy on C: | Kept until the first job runs through the junction, then deleted. |
+| 13 | RAM | **32 GB is enough.** GitHub for slow runs, the MSI for local ones; two Alienwares available later. |
+| 14 | Local model | **A smaller model** than the 14B, so Chrome keeps its graphics memory. |
+| 15 | Where things live | **E: is the big data store.** GitHub holds records, testcodes and final versions in their repositories. The homepage receives only what is satisfied with, and only public-facing, business-like material. |
+| 16 | Pace | Small steps, as much as possible within reason; real budget from Saturday. |
+| 17 | Signatory | **After the app is mature and on real projects.** Until then: build without warranty, like Ubuntu. |
+| 18 | First network from a typed command | **The London Underground**, topology only, no artwork. The wordmark already drawn from particles (`logo` mode in the cockpit) goes to the homepage under a new nest, **About**, once it assembles fully; on 17 September it assembled 3 %, so it is build B2, not a publish. |
+| 19 | The phone test | Vikram opens https://ventusltd.github.io/star-electron-star/ on his iPhone and reports draw or blank and seconds to first draw. |
+
 ## 11. How work is paid for
 
 Repeatable work runs on GitHub-hosted runners and the workstation for free. Reasoning is spent one turn at a time. One agent at most, and only after the rules and the scope exist. This document is that scope.
