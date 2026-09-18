@@ -1,0 +1,82 @@
+name: nightly
+# Progress without a model: every three hours GitHub draws B1 (spiral vs stack) and B2 (the Underground
+# from a typed command), commits the pictures and the measured facts into results/, and the MSI swarm,
+# when dispatched, does the big runs into E:\particles-runs and mirrors them.
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+    inputs:
+      msi:
+        description: "also run the big layer sweep on the MSI swarm (E: drive)"
+        type: boolean
+        default: false
+      layers:
+        description: "largest layer count for the MSI sweep (2^18 particles each)"
+        default: "64"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nightly
+  cancel-in-progress: false
+
+jobs:
+  github:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: B1 spiral vs stack, 4 layers of 2^18
+        run: python tools/spiral_vs_stack.py --layers 4 --out out/b1
+      - name: B2 the Underground from a typed command (TfL open data)
+        run: python tools/underground.py --out out/b2
+      - name: T2 and T4 again, so the record repeats itself
+        run: |
+          python tools/particles.py exactness
+          python tools/particles.py layer --layer 1 --out out/layer
+          python tools/particles.py dna out/layer/layer-1.json
+      - name: commit the results
+        run: |
+          stamp=$(date -u +%Y%m%dT%H%MZ)
+          mkdir -p results/$stamp
+          cp out/b1/*.png out/b1/*.json out/b2/underground.png out/b2/underground.json out/layer/layer-1.json results/$stamp/
+          {
+            echo "# Latest results: $stamp (GitHub-hosted, ubuntu-latest)"
+            echo
+            echo "![spiral vs stack](results/$stamp/spiral-vs-stack.png)"
+            echo
+            echo "![the Underground from a typed command](results/$stamp/underground.png)"
+            echo
+            echo '```'; cat out/b1/spiral-vs-stack.json; echo; cat out/b2/underground.json; echo '```'
+          } > results/LATEST.md
+          git config user.name "particles-nightly"
+          git config user.email "actions@users.noreply.github.com"
+          git add results
+          git commit -m "results $stamp: B1 spiral vs stack, B2 underground, T2, T4" || echo "nothing new"
+          git push
+
+  msi-sweep:
+    if: ${{ inputs.msi }}
+    strategy:
+      fail-fast: false
+      matrix:
+        layers: [1, 4, 16, 64]
+    runs-on: [self-hosted, msi, gpu]
+    steps:
+      - uses: actions/checkout@v4
+      - name: big run on the MSI, written to E:
+        shell: pwsh
+        run: |
+          $out = "E:\particles-runs\$(Get-Date -Format yyyyMMddTHHmm)-layers-${{ matrix.layers }}"
+          if (${{ matrix.layers }} -gt ${{ inputs.layers }}) { "skipped: above the requested size"; exit 0 }
+          python tools/spiral_vs_stack.py --layers ${{ matrix.layers }} --out $out
+          python tools/particles.py layer --layer ${{ matrix.layers }} --out $out
+          python tools/particles.py dna "$out\layer-${{ matrix.layers }}.json"
+          Get-ChildItem $out | Select-Object Name, Length
+      - name: mirror the repository's results to E:
+        shell: pwsh
+        run: robocopy results "E:\particles-runs\results-mirror" /E /NFL /NDL /NJH /NJS; if ($LASTEXITCODE -le 7) { exit 0 }
