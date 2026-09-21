@@ -1,0 +1,18 @@
+{
+ "layers": 256,
+ "particles_per_layer": 262144,
+ "particles": 67108864,
+ "spiral": {
+  "cells_lit": 823777,
+  "peak_per_cell": 91,
+  "seconds": 17.3
+ },
+ "stack": {
+  "cells_lit": 824320,
+  "peak_per_cell": 93,
+  "tile_px": 64,
+  "seconds": 20.09
+ },
+ "raster_px": 1024,
+ "generated_utc": "2026-09-21T19:40:42Z"
+}
