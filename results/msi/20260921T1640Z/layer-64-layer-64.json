@@ -1,0 +1,22 @@
+{
+ "layer": 64,
+ "recipe": "grid-feeder",
+ "seed": "2026-09-18-L64",
+ "slots": 262144,
+ "address_first": 16777216,
+ "address_last": 17039359,
+ "sha256_of_line_hashes": "cf3849b416d8fc1c377d3b31c55d56352ff85a28152a0e39de1bd15f3b9a7c86",
+ "chars_total": 15620836,
+ "rim_radius": 441.8828,
+ "raster_peak_particles_per_cell": 4,
+ "sample": {
+  "0": "bus[0] = Bus(kv=275, load_kw=8346, fed_from=bus[0])",
+  "1": "bus[1] = Bus(kv=66, load_kw=2177, fed_from=bus[0])",
+  "39885": "bus[39885] = Bus(kv=132, load_kw=7248, fed_from=bus[20812])",
+  "262143": "bus[262143] = Bus(kv=400, load_kw=6485, fed_from=bus[114039])"
+ },
+ "generated_utc": "2026-09-21T16:40:15Z",
+ "python": "3.12.10",
+ "platform": "Windows-11-10.0.26200-SP0",
+ "seconds": 0.67
+}
