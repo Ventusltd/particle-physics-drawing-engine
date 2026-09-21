@@ -1,4 +1,4 @@
-# Scope status 2026-09-21T08:40:48Z
+# Scope status 2026-09-21T09:40:49Z
 
 Ran 4 of 9 tests; 0 failed. Tests marked NOT YET BUILT have no script yet (T1 needs a person with the phone).
 
@@ -12,4 +12,4 @@ Ran 4 of 9 tests; 0 failed. Tests marked NOT YET BUILT have no script yet (T1 ne
 | T6 | a law missing a fact refuses by name | **NOT YET BUILT** |  | `` |
 | T7 | sixteen layers served from the workstation's second drive | **NOT YET BUILT** |  | `` |
 | B1 | spiral and stack side by side | **PASS** | exit 0, 4.0 s | `{"layers": 4, "particles_per_layer": 65536, "particles": 262144, "spiral": {"cells_lit": 262144, "peak_per_cell": 1, "se` |
-| B2 | a network from a typed command (the Underground) | **PASS** | exit 0, 2.1 s | `{"command": "draw underground", "source": "https://api.tfl.gov.uk/Line/Mode/tube + /Line/<id>/Route/Sequence/all", "attr` |
+| B2 | a network from a typed command (the Underground) | **PASS** | exit 0, 1.9 s | `{"command": "draw underground", "source": "https://api.tfl.gov.uk/Line/Mode/tube + /Line/<id>/Route/Sequence/all", "attr` |
