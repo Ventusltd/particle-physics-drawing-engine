@@ -6,7 +6,7 @@ business-like page: the pictures the run drew, the facts it measured, the scope 
 lists every iteration with its label so the owner can decide which to keep. Publishes through the
 GitHub contents API (no local clone state), only small files. Stops at 30. No model text is published.
 """
-import base64, json, os, subprocess, sys, time
+import base64, json, os, subprocess, sys
 
 REPO = "Ventusltd/globalgrid2050"
 BASE = "testcode/particles"
