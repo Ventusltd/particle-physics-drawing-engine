@@ -1,0 +1,17 @@
+# pre-commit: `pip install pre-commit && pre-commit install`. Ruff reports only; nothing is reformatted.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.0
+    hooks:
+      - id: ruff
+        args: [--no-fix]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-json
+        exclude: ^results/
+      - id: check-yaml
+      - id: end-of-file-fixer
+        files: ^(tools|tests|measurements)/
+      - id: trailing-whitespace
+        files: ^(tools|tests|measurements)/
