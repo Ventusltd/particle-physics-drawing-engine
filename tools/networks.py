@@ -9,7 +9,7 @@ every node is a vertex of the source geometry or a point in the source data.
 Sources (all public): grid_400kv.geojson, grid_132kv.geojson, grid_substations.geojson at globalgrid2050.com
 (OpenStreetMap-derived, ODbL); Natural Earth coastlines (public domain); a REPD project from Pipeline News.
 """
-import argparse, json, math, os, sys
+import argparse, json, math, os
 
 OSM = "© OpenStreetMap contributors, Open Database Licence (ODbL); published at globalgrid2050.com"
 NE = "Natural Earth (naturalearthdata.com), public domain"

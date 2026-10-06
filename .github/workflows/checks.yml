@@ -1,0 +1,36 @@
+name: checks
+# Lint and smoke tests on every pull request. No model, no self-hosted runner, no results/ commit.
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: check .
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-audit --no-fund --package-lock=false
+      - run: npm run lint:js
+  smoke-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Python smoke tests (tools import, core laws return sane numbers)
+        run: python -m unittest discover -s tests -v
+      - name: Node smoke tests (measurement scripts parse, the angle law agrees with Python)
+        run: node --test tests/*.test.mjs

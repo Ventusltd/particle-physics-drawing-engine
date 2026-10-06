@@ -1,0 +1,17 @@
+# Ruff, permissive on purpose: real mistakes only (undefined names, unused imports, syntax), no style rules and
+# no reformatting of the existing tools. Run: ruff check .    (or: pre-commit run --all-files)
+line-length = 200
+target-version = "py311"
+extend-exclude = ["results", "measurements", "sample-images", "stones", "out"]
+
+[lint]
+select = ["E", "F", "W"]
+ignore = [
+  "E501",  # line length: the tools are written wide on purpose
+  "E701", "E702",  # several statements on one line
+  "E731",  # lambda assignment
+  "E741",  # ambiguous names such as l, I, O
+  "E402",  # imports after the module docstring and sys.path edits
+  "E401",  # `import a, b, c` on one line is the house style
+  "F841",  # two unused locals in existing tools; left as they are
+]
