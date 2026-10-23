@@ -1,4 +1,4 @@
-# Latest results: 20261023T0501Z (GitHub-hosted, ubuntu-latest)
+# Latest results: 20261023T1148Z (GitHub-hosted, ubuntu-latest)
 
 ![spiral vs stack](latest/spiral-vs-stack.png)
 
@@ -12,16 +12,16 @@
  "spiral": {
   "cells_lit": 802553,
   "peak_per_cell": 4,
-  "seconds": 0.7
+  "seconds": 0.77
  },
  "stack": {
   "cells_lit": 803052,
   "peak_per_cell": 4,
   "tile_px": 512,
-  "seconds": 0.96
+  "seconds": 0.97
  },
  "raster_px": 1024,
- "generated_utc": "2026-10-23T05:00:53Z"
+ "generated_utc": "2026-10-23T11:48:02Z"
 }
 {
  "command": "draw underground",
@@ -30,8 +30,8 @@
  "lines": 11,
  "stations": 341,
  "edges": 314,
- "particles_drawn": 6322,
+ "particles_drawn": 6329,
  "law": "geography then 200 passes of 8-direction edge snapping (step 0.05); edge particles every 0.004; 9 per station",
- "seconds": 18.5,
- "generated_utc": "2026-10-23T05:01:12Z"
+ "seconds": 11.7,
+ "generated_utc": "2026-10-23T11:48:14Z"
 }```
